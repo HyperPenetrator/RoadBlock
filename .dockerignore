@@ -1,0 +1,8 @@
+frontend/node_modules/
+backend/__pycache__/
+frontend/dist/
+frontend/android/
+.git/
+.vscode/
+*.apk
+*.log

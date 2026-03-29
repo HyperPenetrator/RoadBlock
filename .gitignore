@@ -1,0 +1,27 @@
+# Dependencies
+node_modules/
+.npm
+dist/
+dist-ssr
+*.local
+
+# IDE
+.vscode/
+.idea/
+.gemini/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Build Artifacts
+frontend/dist/
+frontend/android/
+backend/__pycache__/
+*.apk
+*.log
+
+# OS
+.DS_Store
+Thumbs.db

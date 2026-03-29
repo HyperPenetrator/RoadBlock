@@ -1,0 +1,105 @@
+:root {
+  --zomato-red: #E23744;
+  --zomato-dark: #1C1C1C;
+  --zomato-gray: #696969;
+  --zomato-bg: #F8F8F8;
+  --zomato-white: #FFFFFF;
+  --neon-blue: #00D1FF;
+}
+
+body {
+  font-family: ui-sans-serif, system-ui, sans-serif;
+  background-color: var(--zomato-bg);
+  color: var(--zomato-dark);
+  overflow-x: hidden;
+}
+
+body ::selection {
+  background-color: #fee2e2;
+  color: var(--zomato-red);
+}
+
+.floating-ui {
+  background-color: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 24px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+  transition: all 300ms ease-in-out;
+}
+
+.floating-ui:hover {
+  transform: translateY(-8px) scale(1.01);
+  box-shadow: 0 25px 50px rgba(0,0,0,0.12);
+}
+
+.neo-button {
+  box-shadow: 0 8px 15px rgba(226,55,68,0.2);
+  transition: all 300ms ease-in-out;
+}
+
+.neo-button:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 25px rgba(226,55,68,0.3);
+}
+
+.skeleton {
+  background-image: linear-gradient(to right, #e5e7eb, #f9fafb, #e5e7eb);
+  background-size: 200% 100%;
+  animation: skeleton 1.5s linear infinite;
+}
+
+@keyframes skeleton {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.scanning-dots {
+  background-image: radial-gradient(var(--zomato-red) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+@keyframes skeleton {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+@keyframes float-rider {
+  0%, 100% { transform: translateY(0) rotate(0); }
+  50% { transform: translateY(-15px) rotate(1deg); }
+}
+
+.anime-fig-float {
+  animation: float-rider 4s ease-in-out infinite;
+}
+
+.glass-hud {
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.hud-font {
+  font-family: 'JetBrains Mono', 'Inter', monospace;
+}
+
+/* Notch-safe top padding on mobile */
+.pt-safe {
+  padding-top: env(safe-area-inset-top, 0px);
+}
+
+/* Prevent Leaflet from flashing white on mount */
+.leaflet-container {
+  background: #080A12 !important;
+}
+
+/* Metric digit rendering — sub-pixel crisp */
+.hud-metric {
+  font-family: 'JetBrains Mono', monospace;
+  font-variant-numeric: tabular-nums;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+

@@ -1,0 +1,82 @@
+name: Build Android APK
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Setup Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      - name: Install Frontend Dependencies
+        working-directory: ./frontend
+        run: npm ci
+
+      - name: Build Web App
+        working-directory: ./frontend
+        env:
+          VITE_API_URL: ${{ secrets.VITE_API_URL }}
+        run: npm run build
+
+      - name: Sync Capacitor
+        working-directory: ./frontend
+        run: |
+          npx cap sync android 2>/dev/null || {
+            npx cap add android
+            npx cap sync android
+          }
+
+      - name: Patch AndroidManifest.xml
+        working-directory: ./frontend/android
+        run: |
+          MANIFEST="app/src/main/AndroidManifest.xml"
+          for PERM in \
+            "android.permission.ACCESS_COARSE_LOCATION" \
+            "android.permission.ACCESS_FINE_LOCATION" \
+            "android.permission.FOREGROUND_SERVICE" \
+            "android.permission.WAKE_LOCK"; do
+            grep -q "\"$PERM\"" "$MANIFEST" || \
+              sed -i "/<uses-permission android:name=\"android.permission.INTERNET\"/a\\    <uses-permission android:name=\"$PERM\" />" "$MANIFEST"
+          done
+          grep -q "android.hardware.location.gps" "$MANIFEST" || \
+            sed -i "/<uses-permission android:name=\"android.permission.INTERNET\"/a\\    <uses-feature android:name=\"android.hardware.location.gps\" android:required=\"false\" />" "$MANIFEST"
+
+      - name: Set Target SDK 34
+        working-directory: ./frontend/android
+        run: |
+          sed -i "s/compileSdkVersion = [0-9]*/compileSdkVersion = 34/" variables.gradle
+          sed -i "s/targetSdkVersion = [0-9]*/targetSdkVersion = 34/" variables.gradle
+          sed -i "s/minSdkVersion = [0-9]*/minSdkVersion = 23/" variables.gradle
+
+      - name: Build Debug APK
+        working-directory: ./frontend/android
+        run: |
+          chmod +x gradlew
+          ./gradlew assembleDebug --no-daemon --stacktrace
+
+      - name: Upload APK Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: roadfirewall-debug-${{ github.sha }}
+          path: frontend/android/app/build/outputs/apk/debug/app-debug.apk
+          retention-days: 30
