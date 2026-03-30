@@ -1,0 +1,62 @@
+
+> roadfirewall-frontend@1.0.0 test
+> vitest --run
+
+
+[7m[1m[36m RUN [39m[22m[27m [36mv1.6.1[39m [90mD:/Projects/RoadFireWall/frontend[39m
+
+ [32m✓[39m src/tests/navigation.test.ts [2m ([22m[2m3 tests[22m[2m)[22m[90m 12[2mms[22m[39m
+[90mstderr[2m | src/tests/geolocation.test.ts[2m > [22m[2mFeature B: Geolocation & State Management[2m > [22m[2mprevents race conditions via AbortController on rapid clicks[22m[39m
+Warning: An update to TestComponent inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://reactjs.org/link/wrap-tests-with-act
+    at TestComponent (D:\Projects\RoadFireWall\frontend\node_modules\@testing-library\react\dist\pure.js:307:5)
+Warning: An update to TestComponent inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://reactjs.org/link/wrap-tests-with-act
+    at TestComponent (D:\Projects\RoadFireWall\frontend\node_modules\@testing-library\react\dist\pure.js:307:5)
+Warning: An update to TestComponent inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://reactjs.org/link/wrap-tests-with-act
+    at TestComponent (D:\Projects\RoadFireWall\frontend\node_modules\@testing-library\react\dist\pure.js:307:5)
+Warning: An update to TestComponent inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://reactjs.org/link/wrap-tests-with-act
+    at TestComponent (D:\Projects\RoadFireWall\frontend\node_modules\@testing-library\react\dist\pure.js:307:5)
+
+ [32m✓[39m src/tests/geolocation.test.ts [2m ([22m[2m3 tests[22m[2m)[22m[90m 22[2mms[22m[39m
+ [32m✓[39m src/tests/permissions.test.ts [2m ([22m[2m4 tests[22m[2m)[22m[90m 19[2mms[22m[39m
+
+[2m Test Files [22m [1m[32m3 passed[39m[22m[90m (3)[39m
+[2m      Tests [22m [1m[32m10 passed[39m[22m[90m (10)[39m
+[2m   Start at [22m 20:42:45
+[2m   Duration [22m 1.59s[2m (transform 171ms, setup 0ms, collect 749ms, tests 53ms, environment 2.37s, prepare 428ms)[22m
+
